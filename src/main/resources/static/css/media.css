@@ -24,16 +24,5 @@
         text-indent: 0;
     }
 
-    .board_page a {
-        width: 26px;
-        height: 26px;
-    }
 
-    .board_page a.bt {
-        padding-top: 7px;
-    }
-
-    .board_page a.num {
-        padding-top: 6px;
-    }
 }
