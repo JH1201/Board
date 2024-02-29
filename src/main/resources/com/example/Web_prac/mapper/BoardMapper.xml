@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.Web_prac.mapper.BoardMapper">
+
+
+    <select resultType="int" id="boardCount">
+        SELECT count(boardId) AS cnt FROM tbl_board
+    </select>
+
+    <select id="getList" resultType="com.example.Web_prac.domain.Board">
+        SELECT
+        *
+        FROM tbl_board
+    </select>
+
+    <select id="getBoard" parameterType="Long" resultType="com.example.Web_prac.domain.Board">
+        SELECT
+            *
+        FROM tbl_board where boardId=#{boardId};
+    </select>
+
+    <insert id="uploadBoard" parameterType="com.example.Web_prac.domain.Board">
+        INSERT INTO tbl_board (boardId ,title, content, name, date)
+        VALUES
+            (#{boardId}, #{title}, #{content}, #{name}, #{date});
+    </insert>
+
+    <update id="updateBoard" parameterType="com.example.Web_prac.domain.Board">
+        UPDATE tbl_board
+        SET title=#{title}, content=#{content}, name=#{name}
+        WHERE boardId=#{boardId};
+    </update>
+
+    <delete id="deleteBoard" parameterType="Long">
+        DELETE
+        FROM tbl_board
+        WHERE boardId=#{boardId};
+    </delete>
+
+    <update id="modifyBoardNumber" parameterType="Long">
+        UPDATE
+        tbl_board SET BOARDID = BOARDID-1
+        WHERE boardId>#{boardId};
+    </update>
+
+
+    <update id="viewCount">
+        UPDATE tbl_board
+        SET read = read + 1
+        WHERE boardId=#{boardId};
+    </update>
+
+</mapper>

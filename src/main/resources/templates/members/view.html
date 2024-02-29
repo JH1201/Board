@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns xmlns:th="http://www.w3.org/1999/xhtml" : th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Board</title>
+    <link rel="stylesheet" href="/css/css.css">
+
+    <style>
+        #myTextarea {
+            width: 1000px; /* 너비를 px로 설정합니다. */
+            height: 100px; /* 높이를 100px로 설정합니다. */
+        }
+    </style>
+</head>
+<body>
+
+<div class="board_wrap">
+    <div class="board_title">
+        <strong><a href="/">Hello Board</a></strong>
+        <p>자신의 생각을 Hello Board와 함께 마음껏 펼쳐보세요.</p>
+    </div>
+
+
+    <div class="board_view_wrap">
+        <div class="board_view">
+            <div class="title">
+                [[${halo.title}]]
+            </div>
+
+            <div class="info">
+                <dl>
+                    <dt>번호</dt>
+                    <dd>[[${halo.boardId}]]</dd>
+                </dl>
+
+                <dl>
+                    <dt>글쓴이</dt>
+                    <dd>[[${halo.name}]]</dd>
+                </dl>
+
+                <dl>
+                    <dt>작성일</dt>
+                    <dd>[[${halo.date}]]</dd>
+                </dl>
+
+                <dl>
+                    <dt>조회수</dt>
+                    <dd>[[${halo.read}]]</dd>
+                </dl>
+
+            </div>
+
+            <div class="cont">
+                <textarea id="myTextarea" style="border: none" class="form-control" th:text="${halo.content}"></textarea>
+            </div>
+
+        </div>
+
+        <div class="button_wrap">
+            <form th:action="@{edit.html}" method="get">
+                <input type="hidden" name="boardId" th:value="${halo.boardId}">
+                <button type="submit">수정</button>
+            </form>
+
+            <form th:action="@{delete}" method="get">
+                <input type="hidden" name="boardId" th:value="${halo.boardId}">
+                <button type="submit">삭제</button>
+            </form>
+
+            <form th:action="@{/}" method="get">
+                <button type="submit">홈</button>
+            </form>
+
+        </divbutton_wrap>
+
+    </div>
+</div>
+
+</body>
+</html>
