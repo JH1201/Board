@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.Web_prac.mapper.MemberRepository">
+
+    <insert id="save" parameterType="com.example.Web_prac.domain.Member">
+        INSERT INTO tbl_member (userName ,userId, userPw)
+        VALUES
+            (#{userName}, #{userId}, #{userPw});
+    </insert>
+
+    <select id="findByUserId" resultType="com.example.Web_prac.domain.Member" parameterType="String">
+        SELECT
+            *
+        FROM tbl_member where userId=#{userId}
+    </select>
+
+
+</mapper>

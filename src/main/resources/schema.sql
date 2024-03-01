@@ -12,7 +12,7 @@ CREATE TABLE tbl_member(
                           memberId Long auto_increment,
                           userName varchar (30) not null,
                           userId varchar (30) not null ,
-                          userPassword varchar (30) not null,
+                          userPw varchar (30) not null,
                           primary key(memberId)
 );
 
