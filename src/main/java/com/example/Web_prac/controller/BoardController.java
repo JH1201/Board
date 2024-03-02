@@ -1,6 +1,7 @@
 package com.example.Web_prac.controller;
 
 import com.example.Web_prac.domain.Board;
+import com.example.Web_prac.domain.Member;
 import com.example.Web_prac.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,19 +9,43 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class BoardController {
 
+
+
     private final BoardService boardService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession(false);
+
         model.addAttribute("list",boardService.boardList());
 
-        return "/members/list";
+        // 로그인한 사용자가 아니라면 /으로 보낸다.
+        if ( session == null) {
+            return "/members/list";
+        }
+
+        Member loginMember = (Member)session.getAttribute("user");
+        // 사용자가 없으면 null 처리 필요
+        if(loginMember == null) {
+            return "/members/list";
+        }
+
+        // loginHome : 로그인에 성공한 사람만이 볼 수 있는 화면
+        model.addAttribute("member", loginMember);
+        return "/members/list_afterLogin";
+
+
     }
 
     @GetMapping("/view")

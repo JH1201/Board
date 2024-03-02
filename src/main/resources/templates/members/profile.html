@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:float="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/css/css.css">
+    <meta charset="UTF-8">
+    <title>Hello Board</title>
+</head>
+
+<body>
+
+<div class="board_wrap">
+    <div class="board_title">
+        <strong><a href="/">Hello Board</a></strong>
+        <p>자신의 생각을 Hello Board와 함께 마음껏 펼쳐보세요.</p>
+    </div>
+
+    <div>
+        <div><a href="/">로그아웃</a> / <a href="/profile">프로필</a></div>
+    </div>
+
+    <div>
+        <div class="board_list">
+            <div>
+                <div class="num">번호</div>
+                <div class="title">제목</div>
+                <div class="writer">글쓴이</div>
+                <div class="date">작성일</div>
+                <div class="viewCount">조회수</div>
+            </div>
+
+            <div class="view_list">
+                <tr th:each="list :${list}"> <!-- 타임리프를 이용해 리스트 형식의 데이터를 가공할 수 있도록 함. -->
+                    <!-- <div class="num">[[${cnt}]]</div> --> <!-- cnt : 게시글 수 -->
+                    <div class="num">[[${list.boardId}]]</div> <!-- num : 순번 -->
+                    <div class="title">
+                        <a th:href="@{/view(boardId=${list.boardId})}">
+                            [[${list.title}]]
+                        </a>
+                    </div> <!-- test : 게시글 리스트, test[0].title : 첫번째 게시글 제목 -->
+                    <div class="writer">[[${list.name}]]</div> <!-- name : 글쓴이 -->
+                    <div class="date">[[${list.date}]]</div> <!-- date : 작성일 -->
+                    <div class="viewCount">[[${list.read}]]</div> <!-- viewCount : 조회수 -->
+                </tr>
+            </div>
+        </div>
+
+
+
+        <div class="button_wrap">
+            <a href="write.html" style="background: black; color:white;" class="on">등록</a>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

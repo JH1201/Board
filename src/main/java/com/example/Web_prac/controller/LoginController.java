@@ -3,13 +3,18 @@ package com.example.Web_prac.controller;
 import com.example.Web_prac.domain.Member;
 import com.example.Web_prac.service.MemberService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
+
 
     private final MemberService memberService;
 
@@ -18,15 +23,57 @@ public class LoginController {
     }
 
 
-    @GetMapping("/login.html")
-    public String login(@RequestParam String userId) {
-
-        Member user = memberService.findUser(userId);
-
+    @GetMapping("/login")
+    public String login() {
         return "/members/login";
     }
 
-    @GetMapping("/register.html")
+    @PostMapping("/login")
+    public String login(@RequestParam String userId,
+                        @RequestParam String userPw,
+                        HttpServletRequest request,
+                        RedirectAttributes redirectAttributes) {
+
+        Member user = memberService.checkUser(userId);
+
+        if(user == null) {
+            return "/members/login";
+        }
+
+
+        if(user.getUserPw().equals(userPw)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setMaxInactiveInterval(1800); // Session이 30분동안 유지
+
+            return "redirect:/";
+
+        }
+
+        else {
+            return "/members/login";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute("user");
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/list")
+    public String logout(HttpSession session) {
+        // 세션에서 사용자 정보를 제거하고 로그아웃 처리합니다.
+        session.removeAttribute("username");
+        return "redirect:/";
+    }
+
+    @GetMapping("/register")
     public String showRegisterPage() {
         return "/members/register"; // 회원가입 페이지를 보여줌
     }

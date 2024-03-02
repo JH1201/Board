@@ -23,9 +23,14 @@ public class MemberService {
 
     }
 
-
     public Member findUser(String userId) {
         return memberRepository.findByUserId(userId);
     }
+
+    public Member checkUser(String userId) {
+
+        return memberRepository.findByUserId(userId);
+    }
+
 
 }
