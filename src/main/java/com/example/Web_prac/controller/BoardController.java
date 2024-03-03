@@ -57,7 +57,21 @@ public class BoardController {
     }
 
     @GetMapping("/write.html")
-    public String uploadBoardForm(Long boardId) {
+    public String uploadBoardForm(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        // 로그인한 사용자가 아니라면 /으로 보낸다.
+        if ( session == null) {
+            return "redirect:/";
+        }
+
+        Member loginMember = (Member)session.getAttribute("user");
+        // 사용자가 없으면 null 처리 필요
+        if(loginMember == null) {
+            return "redirect:/";
+        }
+
+
         return "/members/write";
     }
 

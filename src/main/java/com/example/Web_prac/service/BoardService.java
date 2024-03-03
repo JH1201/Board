@@ -1,6 +1,7 @@
 package com.example.Web_prac.service;
 
 import com.example.Web_prac.domain.Board;
+import com.example.Web_prac.domain.Member;
 import com.example.Web_prac.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class BoardService {
     public Board getBoard(Long boardId) {
         return boardMapper.getBoard(boardId);
     }
+
 
     public List<Board> boardList() {
         return boardMapper.getList(); // 게시글 리스트 반환

@@ -59,19 +59,17 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.removeAttribute("user");
+            System.out.println("session = " + session);
+
+            //session.removeAttribute("user");
             session.invalidate();
+
         }
+
+
         return "redirect:/";
     }
 
-
-    @GetMapping("/list")
-    public String logout(HttpSession session) {
-        // 세션에서 사용자 정보를 제거하고 로그아웃 처리합니다.
-        session.removeAttribute("username");
-        return "redirect:/";
-    }
 
     @GetMapping("/register")
     public String showRegisterPage() {
