@@ -75,6 +75,8 @@ public class BoardController {
         return "/members/write";
     }
 
+
+    // 게시글 생성
     @PostMapping("/write.html")
     public String uploadBoard(Board board) {
         boardService.uploadBoard(board);
@@ -87,13 +89,14 @@ public class BoardController {
 
         return "/members/edit";
     }
-
+    // 게시글 수정
     @PostMapping("/edit.html")
     public String updateBoard(Board board) {
         boardService.updateBoard(board);
         return "redirect:/";
     }
 
+    // 게시글 삭제
     @GetMapping("/delete")
     public String deleteBoard(Long boardId) {
         boardService.deleteBoard(boardId);

@@ -32,11 +32,13 @@ public class LoginController {
     public String login(@RequestParam String userId,
                         @RequestParam String userPw,
                         HttpServletRequest request,
-                        RedirectAttributes redirectAttributes) {
+                        RedirectAttributes redirectAttributes,
+                        Model model) {
 
         Member user = memberService.checkUser(userId);
 
         if(user == null) {
+            model.addAttribute("error", "아이디 또는 비밀번호를 확인하세요."); // 실패 메시지 전달
             return "/members/login";
         }
 
@@ -51,6 +53,7 @@ public class LoginController {
         }
 
         else {
+            model.addAttribute("error", "아이디 또는 비밀번호를 확인하세요."); // 실패 메시지 전달
             return "/members/login";
         }
     }
