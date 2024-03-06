@@ -14,6 +14,7 @@
         FROM tbl_board
     </select>
 
+
     <select id="getBoard" parameterType="Long" resultType="com.example.Web_prac.domain.Board">
         SELECT
             *

@@ -15,6 +15,12 @@
         FROM tbl_member where userId=#{userId}
     </select>
 
+    <select id="getAllMember" resultType="com.example.Web_prac.domain.Member">
+        SELECT
+            *
+        FROM tbl_member
+    </select>
+
 
 
 </mapper>

@@ -31,6 +31,8 @@ public class LoginTest {
         //when
         Member findUser = memberService.findUser(userId);
 
+        System.out.println("findUser.getUserId() = " + findUser.getUserId());
+
         //then
         Assertions.assertThat(userId).isEqualTo(findUser.getUserId());
     }

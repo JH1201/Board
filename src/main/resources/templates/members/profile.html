@@ -29,7 +29,7 @@
             </div>
 
             <div class="view_list">
-                <tr th:each="list :${list}"> <!-- 타임리프를 이용해 리스트 형식의 데이터를 가공할 수 있도록 함. -->
+                <tr th:each="list :${myBoard}"> <!-- 타임리프를 이용해 리스트 형식의 데이터를 가공할 수 있도록 함. -->
                     <!-- <div class="num">[[${cnt}]]</div> --> <!-- cnt : 게시글 수 -->
                     <div class="num">[[${list.boardId}]]</div> <!-- num : 순번 -->
                     <div class="title">
@@ -47,7 +47,7 @@
 
 
         <div class="button_wrap">
-            <a href="write.html" style="background: black; color:white;" class="on">등록</a>
+            <a href="/" style="background: black; color:white;" class="on">홈</a>
 
         </div>
 

@@ -7,6 +7,8 @@
 <body>
 회원가입
 
+<div th:if="${error1}" style="color: red;">[[${error1}]]</div>
+
 <form action="/register" method="post">
     username: <input type="text" name="userName" required /> <br>
     userID : <input type="text" name="userId" required /> <br>

@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class LoginController {
@@ -62,14 +64,10 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            System.out.println("session = " + session);
+            //System.out.println("session = " + session);
 
-            //session.removeAttribute("user");
             session.invalidate();
-
         }
-
-
         return "redirect:/";
     }
 
@@ -83,13 +81,21 @@ public class LoginController {
     @PostMapping("/register")
     public String register(@RequestParam String userName,
                            @RequestParam String userId,
-                           @RequestParam String userPw) {
+                           @RequestParam String userPw,
+                           Model model) {
+
+        Member user = memberService.findUser(userId);
 
 
         // 회원가입 정보의 유효성 검사
         if (userName == null || userId == null || userPw == null) {
             // 유효성 검사 실패 시 처리
             return "error-page"; // 예: 에러 페이지로 이동
+        }
+
+        if(user != null) {
+            model.addAttribute("error1", "중복된 ID입니다."); // 실패 메시지 전달
+            return "/members/register";
         }
 
         // 회원가입 정보의 보안 처리 (예를 들어, 패스워드 암호화)

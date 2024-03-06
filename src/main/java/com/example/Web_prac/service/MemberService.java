@@ -4,6 +4,8 @@ import com.example.Web_prac.domain.Member;
 import com.example.Web_prac.mapper.MemberRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -25,6 +27,10 @@ public class MemberService {
 
     public Member findUser(String userId) {
         return memberRepository.findByUserId(userId);
+    }
+
+    public List<Member> findAll() {
+        return memberRepository.getAllMember();
     }
 
     public Member checkUser(String userId) {
